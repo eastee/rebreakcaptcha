@@ -26,6 +26,22 @@ LONG_MAX_RAND   = 11.1
 NUMBER_OF_ITERATIONS = 100
 RECAPTCHA_PAGE_URL = "https://www.google.com/recaptcha/api2/demo"
 
+HOUNDIFY_CLIENT_ID = "{YOUR_CLIENT_ID}"
+HOUNDIFY_CLIENT_KEY = "{YOUR_CLIENT_KEY}"
+
+DIGITS_DICT = {
+                "zero": "0",
+                "one": "1",
+                "two": "2",
+                "three": "3",
+                "four": "4",
+                "five": "5",
+                "six": "6",
+                "seven": "7",
+                "eight": "8",
+                "nine": "9",
+                }
+                
 class rebreakcaptcha(object):
     def __init__(self):
         os.environ["PATH"] += os.pathsep + GECKODRIVER_BIN
@@ -92,6 +108,9 @@ class rebreakcaptcha(object):
         converted_audio.seek(0)
         
         return converted_audio
+        
+    def string_to_digits(self, recognized_string):
+        return ''.join([DIGITS_DICT.get(word, "") for word in recognized_string.split(" ")])
     
     def speech_to_text(self, audio_source):
         # Initialize a new recognizer with the audio in memory as source
@@ -103,10 +122,13 @@ class rebreakcaptcha(object):
         # recognize speech using Google Speech Recognition
         try:
             audio_output = recognizer.recognize_google(audio)
-            # for testing purposes, we're just using the default API key
-            # to use another API key, use `r.recognize_google(audio, key="GOOGLE_SPEECH_RECOGNITION_API_KEY")`
-            # instead of `r.recognize_google(audio)`
             print("[{0}] Google Speech Recognition: ".format(self.current_iteration) + audio_output)
+            # Check if we got harder audio captcha
+            if any(character.isalpha() for character in audio_output):
+                # Use Houndify to detect the harder audio captcha
+                print("[{0}] Fallback to Houndify!".format(self.current_iteration))
+                audio_output = self.string_to_digits(recognizer.recognize_houndify(audio, client_id=HOUNDIFY_CLIENT_ID, client_key=HOUNDIFY_CLIENT_KEY))
+                print("[{0}] Houndify: ".format(self.current_iteration) + audio_output)
         except sr.UnknownValueError:
             print("[{0}] Google Speech Recognition could not understand audio".format(self.current_iteration))
         except sr.RequestError as e:
