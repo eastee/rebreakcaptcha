@@ -8,8 +8,9 @@ More details in the post: https://east-ee.com/2017/02/28/rebreakcaptcha-breaking
 ## Installation
 
  - Requires Python 2.6+ or 3.3+.
- - Install the required dependancies using [pip](https://pip.pypa.io/en/stable/).
- ```shell
+ - Install the required dependancies using [pip](https://pip.pypa.io/en/stable/).  
+ 
+ ```bash
  pip install -r requirements.txt
  ```
  
