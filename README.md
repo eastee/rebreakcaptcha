@@ -11,5 +11,8 @@ More details in the post: https://east-ee.com/2017/02/28/rebreakcaptcha-breaking
  - Install the required dependancies using [pip](https://pip.pypa.io/en/stable/).
  ```shell
  pip install -r requirements.txt
-
  ```
+ 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
