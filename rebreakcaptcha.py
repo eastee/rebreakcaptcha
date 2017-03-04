@@ -87,13 +87,13 @@ class rebreakcaptcha(object):
         self.driver.switch_to_frame(iframes[-1])
         
         # Check if the audio challenge button is present
-        if not self.is_exists_by_xpath('//button[@title="Get an audio challenge"]'):
+        if not self.is_exists_by_xpath('//button[@id="recaptcha-audio-button"]'):
             print("[{0}] No element of audio challenge!!".format(self.current_iteration))
             return False
         
         print("[{0}] Clicking on audio challenge".format(self.current_iteration))
         # Click on the audio challenge button
-        self.driver.find_element_by_xpath('//button[@title="Get an audio challenge"]').click()
+        self.driver.find_element_by_xpath('//button[@id="recaptcha-audio-button"]').click()
         time.sleep(random.uniform(LONG_MIN_RAND, LONG_MAX_RAND))
     
     def get_challenge_audio(self, url):
