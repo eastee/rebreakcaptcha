@@ -3,6 +3,7 @@ import io
 import random
 import time
 import os
+import sys
 
 # Speech Recognition Imports
 from pydub import AudioSegment
@@ -12,6 +13,10 @@ import speech_recognition as sr
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.common.exceptions import NoSuchElementException
 from selenium import webdriver
+
+# check if using python 3
+if sys.version_info[0] > 3:
+    xrange = range
 
 # Firefox / Gecko Driver Related
 FIREFOX_BIN_PATH = r"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"
