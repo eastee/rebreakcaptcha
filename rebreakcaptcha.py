@@ -15,9 +15,8 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium import webdriver
 
 # check if using python 3
-using_python_3 = False
 if sys.version_info[0] > 3:
-    using_python_3 = True
+    xrange = range
 
 # Firefox / Gecko Driver Related
 FIREFOX_BIN_PATH = r"C:\Program Files (x86)\Mozilla Firefox\firefox.exe"
@@ -210,21 +209,12 @@ def main():
     rebreakcaptcha_obj = rebreakcaptcha()
     
     counter = 0
-    if using_python_3:
-        for i in range(NUMBER_OF_ITERATIONS):
-            if rebreakcaptcha_obj.solve(i):
-                counter +=1
+    for i in xrange(NUMBER_OF_ITERATIONS):
+        if rebreakcaptcha_obj.solve(i):
+            counter += 1
             
-            time.sleep(random.uniform(LONG_MIN_RAND, LONG_MAX_RAND))
-            print("Successful breaks: {0}".format(counter))
-      
-    else:
-        for i in xrange(NUMBER_OF_ITERATIONS):
-            if rebreakcaptcha_obj.solve(i):
-                counter += 1
-            
-            time.sleep(random.uniform(LONG_MIN_RAND, LONG_MAX_RAND))
-            print("Successful breaks: {0}".format(counter))
+        time.sleep(random.uniform(LONG_MIN_RAND, LONG_MAX_RAND))
+        print("Successful breaks: {0}".format(counter))
         
     print("Total successful breaks: {0}\{1}".format(counter, NUMBER_OF_ITERATIONS))
 
