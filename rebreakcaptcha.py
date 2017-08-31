@@ -66,7 +66,7 @@ class rebreakcaptcha(object):
             time.sleep(random.uniform(MIN_RAND, MAX_RAND))
             
             # Get all the iframes on the page
-            iframes = self.driver.find_elements_by_tag_name("iframe")
+            iframes = self.driver.find_elements_by_css_selector("iframe[title^='recaptcha']")
             
             # Switch focus to ReCaptcha iframe
             self.driver.switch_to_frame(iframes[0])
