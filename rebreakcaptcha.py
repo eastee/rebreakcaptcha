@@ -184,7 +184,7 @@ class rebreakcaptcha(object):
         self.driver.switch_to.default_content()
                 
         # Get all the iframes on the page again- there is a new one with a challenge
-        iframes = self.driver.find_elements_by_tag_name("iframe")
+        iframes = self.driver.find_elements_by_css_selector("iframe[title^='recaptcha']")
         
         # Get audio challenge
         self.get_audio_challenge(iframes)
