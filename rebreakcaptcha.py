@@ -15,7 +15,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium import webdriver
 
 # check if using python 3
-if sys.version_info[0] > 3:
+if sys.version_info[0] > 2:
     xrange = range
 
 # Firefox / Gecko Driver Related
@@ -143,7 +143,7 @@ class rebreakcaptcha(object):
     
     def solve_audio_challenge(self):
         # Verify audio challenge download button is present
-        if not self.is_exists_by_xpath('//a[@class="rc-audiochallenge-download-link"]') and \
+        if not self.is_exists_by_xpath('//a[@class="rc-audiochallenge-tdownload-link"]') and \
                 not self.is_exists_by_xpath('//div[@class="rc-text-challenge"]'):
             print("[{0}] No element in audio challenge download link!!".format(self.current_iteration))
             return False
@@ -155,7 +155,7 @@ class rebreakcaptcha(object):
             time.sleep(random.uniform(MIN_RAND, MAX_RAND))
 
         # Get the audio challenge URI from the download link
-        download_object = self.driver.find_element_by_xpath('//a[@class="rc-audiochallenge-download-link"]')
+        download_object = self.driver.find_element_by_xpath('//a[@class="rc-audiochallenge-tdownload-link"]')
         download_link = download_object.get_attribute('href')
         
         # Get the challenge audio to send to Google
