@@ -216,7 +216,7 @@ def main():
         time.sleep(random.uniform(LONG_MIN_RAND, LONG_MAX_RAND))
         print("Successful breaks: {0}".format(counter))
         
-    print("Total successful breaks: {0}\{1}".format(counter, NUMBER_OF_ITERATIONS))
+    print("Total successful breaks: {0}/{1}".format(counter, NUMBER_OF_ITERATIONS))
 
 if __name__ == '__main__':
     main()
