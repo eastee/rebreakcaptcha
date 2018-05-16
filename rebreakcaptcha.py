@@ -15,7 +15,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium import webdriver
 
 # check if using python 3
-if sys.version_info[0] > 3:
+if sys.version_info[0] > 2:
     xrange = range
 
 # Firefox / Gecko Driver Related
